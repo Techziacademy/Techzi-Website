@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
-import Ig1 from "../assets/Ig1.jpg";
-import Ig2 from "../assets/Ig2.jpg";
+import Ig1 from "../assets/IG1.jpg";
+import Ig2 from "../assets/IG2.jpg";
 import Ig3 from "../assets/IG3.jpg";
-import Ig4 from "../assets/Ig4.jpg";
-import Ig5 from "../assets/Ig5.jpg";
-import Ig6 from "../assets/Ig6.jpg";
-import Ig7 from "../assets/Ig7.jpg";
-import Ig8 from "../assets/Ig8.jpg";
-import Ig9 from "../assets/Ig9.jpg";
-import Ig10 from "../assets/Ig10.jpg";
-import Ig11 from "../assets/Ig11.jpg";
-import Ig12 from "../assets/Ig12.jpg";
-import Ig13 from "../assets/Ig13.jpg";
-import Ig14 from "../assets/Ig14.jpg";
+import Ig4 from "../assets/IG4.jpg";
+import Ig5 from "../assets/IG5.jpg";
+import Ig6 from "../assets/IG6.jpg";
+import Ig7 from "../assets/IG7.jpg";
+import Ig8 from "../assets/IG8.jpg";
+import Ig9 from "../assets/IG9.jpg";
+import Ig10 from "../assets/IG10.jpg";
+import Ig11 from "../assets/IG11.jpg";
+import Ig12 from "../assets/IG12.jpg";
+import Ig13 from "../assets/IG13.jpg";
+import Ig14 from "../assets/IG14.jpg";
 
 const initialMedia = [
   { id: 1, src: Ig1, alt: "Image 1" },
