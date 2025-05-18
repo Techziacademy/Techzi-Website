@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet";
-import Techzi from "../assets/techzilogo.PNG";
+import Techzi from "../assets/techzilogo.png";
 
 export default function AboutTechzi() {
   return (
