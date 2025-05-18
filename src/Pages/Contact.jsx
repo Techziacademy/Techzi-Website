@@ -1,178 +1,312 @@
-import React, { useRef, useState } from "react";
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { Helmet } from "react-helmet";
 
-function Contact() {
-  const formRef = useRef(null);
-  const [successMessage, setSuccessMessage] = useState("");
+export default function Contact() {
+  const [captcha, setCaptcha] = useState("");
+  const [userCaptcha, setUserCaptcha] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    generateCaptcha();
+  }, []);
+
+  const generateCaptcha = () => {
+    const letters = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz";
+    const numbers = "23456789";
+    let chars = [];
+
+    for (let i = 0; i < 3; i++) {
+      chars.push(letters.charAt(Math.floor(Math.random() * letters.length)));
+      chars.push(numbers.charAt(Math.floor(Math.random() * numbers.length)));
+    }
+
+    const shuffled = chars.sort(() => 0.5 - Math.random()).join("");
+    setCaptcha(shuffled);
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const formData = new FormData(formRef.current);
-    const data = Object.fromEntries(formData.entries());
-
-    // Phone Validation (Ensures exactly 10 digits)
-    const phoneRegex = /^\d{10}$/;
-    if (!phoneRegex.test(data.Phone)) {
-      alert("Please enter a valid 10-digit phone number.");
+    if (userCaptcha !== captcha) {
+      alert("Incorrect CAPTCHA. Please try again.");
+      generateCaptcha();
       return;
     }
 
-    // Email Validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(data.email)) {
-      alert("Please enter a valid email address.");
-      return;
+    const formData = new FormData();
+    formData.append("fullName", fullName);
+    formData.append("phoneNumber", phoneNumber);
+    formData.append("email", email);
+    formData.append("message", message);
+
+    try {
+      const response = await fetch(
+        "https://script.google.com/macros/s/AKfycbyWM4Tp-wXyreziDHSjJI4-DlpXOOfm4YBGOm_e3Lbum7V7_GZTAJCxWSjeXbWBZb9B/exec",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      if (response.ok) {
+        alert(
+          "You've successfully reached Techzi Academy HQ. We’re decoding your message... standby for response😊"
+        );
+        setFullName("");
+        setPhoneNumber("");
+        setEmail("");
+        setMessage("");
+        setUserCaptcha("");
+        generateCaptcha();
+      } else {
+        alert("Submission failed.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Something went wrong.");
     }
+  };
 
-    console.log("Form Submitted", data);
-
-    // Show Success Message
-    setSuccessMessage("Your inquiry has been submitted successfully! ✅");
-
-    // Form Reset after 3 seconds
-    setTimeout(() => {
-      setSuccessMessage("");
-      formRef.current.reset();
-    }, 3000);
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 50 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
   };
 
   return (
-    <div className="max-w-screen-lg mx-auto px-5 py-10" id="contact">
-      <div className="flex flex-col md:flex-row items-center justify-center gap-6">
-        
-        {/* Left Section - Contact Details */}
-        <div className="md:w-1/2 w-full bg-white p-6 md:p-[50px] rounded-lg shadow-lg">
-          <h1 className="text-4xl py-4 font-bold text-center text-blue-600">
-            Contact Us
-          </h1>
-          <p className="text-center font-extrabold text-xl md:text-2xl py-3">
-            Techzi Academy
-          </p>
+    <div className="max-w-screen-lg mx-auto px-5 py-12 font-sans" id="contact">
+      <Helmet>
+        <title>Contact Techzi Academy | Best Computer Institute in Delhi</title>
+        <meta
+          name="description"
+          content="Contact Techzi Academy, the leading computer institute in Kirari, Delhi offering the best courses in programming, web development, and IT skills."
+        />
+        <meta
+          name="keywords"
+          content="Techzi Academy, contact, computer institute Delhi, best programming courses Delhi, coding classes Kirari, IT training"
+        />
+        <meta name="robots" content="index, follow" />
+        <meta property="og:title" content="Contact Techzi Academy" />
+        <meta
+          property="og:description"
+          content="Reach out to Techzi Academy for expert guidance on IT and programming courses. Located in Kirari, New Delhi."
+        />
+        <meta property="og:url" content="https://techziacademy.in/contact" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Techzi Academy" />
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "EducationalOrganization",
+              "name": "Techzi Academy",
+              "url": "https://techziacademy.in",
+              "logo": "https://techziacademy.in/logo.png",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "70 Feet Road, Prem Nagar, Kirari",
+                "addressLocality": "New Delhi",
+                "addressRegion": "Delhi",
+                "postalCode": "110086",
+                "addressCountry": "IN"
+              },
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "telephone": "+91-9599955697",
+                "contactType": "Customer Service",
+                "areaServed": "IN"
+              }
+            }
+          `}
+        </script>
+      </Helmet>
 
-          {/* WhatsApp Clickable Phone Number */}
-          <p className="mb-2">
-            📞 Phone:{" "}
-            <a
-              href="https://wa.me/919599955697"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-600 hover:underline font-semibold"
-            >
-              +91 9599955697 (WhatsApp)
-            </a>
-          </p>
-
-          <p className="mb-2">
-            ✉️ Email:{" "}
-            <a
-              href="mailto:Techziacademy@gmail.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-600 hover:underline font-semibold"
-            >
-              Techziacademy@gmail.com
-            </a>
-          </p>
-          <p className="mb-2">
-            📍 Address: Shaheed Bhagat Singh Chowk, 70 Feet Rd, Kirari Suleman
-            Nagar, North West Delhi
-          </p>
-
-          {/* Business Hours */}
-          <div className="mt-5">
-            <h2 className="text-lg font-semibold">Business Hours</h2>
-            <p>🕒 Monday - Saturday: 10 AM - 6 PM</p>
-            <p>🕒 Sunday: Closed</p>
+      <motion.div
+        className="flex flex-col md:flex-row items-stretch justify-center gap-8"
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.2 }}
+      >
+        {/* Contact Info */}
+        <motion.div
+          variants={fadeInUp}
+          className="md:w-1/2 w-full bg-white/70 backdrop-blur-2xl p-8 rounded-3xl border border-gray-200 shadow-lg flex flex-col justify-between"
+        >
+          <div className="mb-6">
+            <h2 className="text-3xl font-bold text-center text-[#000080] mb-2">
+              Contact 
+            </h2>
+            <p className="text-center text-gray-600 text-lg mb-5">
+              We would love to hear from you. Contact us for top computer
+              courses in Kirari, Delhi.
+            </p>
           </div>
 
-          {/* Call-To-Action Button */}
-          <div className="text-center mt-5">
-            <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full shadow-md transition duration-300">
-              Join Today Now
-            </button>
-          </div>
-        </div>
+          <div className="space-y-6 text-[#000080] text-[14px] leading-relaxed font-sans">
+            <div className="flex items-start gap-4">
+              <span className="text-2xl text-[#07c4f4] mt-1">
+                <i className="fa-solid fa-phone-volume"></i>
+              </span>
+              <div>
+                <p className="text-sm font-semibold">Phone</p>
+                <a
+                  href="tel:+919599955697"
+                  className="text-black font-medium text-base"
+                >
+                  +91 9599955697
+                </a>
+              </div>
+            </div>
 
-        {/* Right Section - Inquiry Form */}
-        <div className="md:w-1/2 w-full bg-white p-6 md:p-[50px] rounded-lg shadow-lg">
-          <h2 className="text-2xl font-bold text-center mb-4 text-blue-600">
-          Get Expert Advice
+            <div className="flex items-start gap-4">
+              <span className="text-2xl text-[#07c4f4] mt-1">
+                <i className="fa-solid fa-envelope"></i>
+              </span>
+              <div>
+                <p className="text-sm font-semibold">Email</p>
+                <a
+                  href="mailto:Techziacademy@gmail.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-black font-medium text-base"
+                >
+                  Techziacademy@gmail.com
+                </a>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-4">
+              <span className="text-2xl text-[#07c4f4] mt-1">
+                <i className="fa-solid fa-location-dot"></i>
+              </span>
+              <div>
+                <p className="text-sm font-semibold">Address</p>
+                <p className="text-base font-medium text-black">
+                  Techzi Academy
+                  <br />
+                  First Floor, Shaheed Bhagat Singh Chowk,
+                  <br />
+                  70 Feet Road, Prem Nagar, Kirari,
+                  <br />
+                  New Delhi - 110086
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="my-6 border-t border-gray-200"></div>
+
+          <div>
+            <h3 className="text-sm text-gray-500 font-semibold mb-2">
+              Business Hours
+            </h3>
+            <p className="text-base font-medium text-[#000080]">
+              Mon - Sat: 9 AM – 8 PM
+            </p>
+            <p className="text-base font-medium text-[#000080]">
+              Sunday: Close
+            </p>
+          </div>
+        </motion.div>
+
+        <motion.form
+          variants={fadeInUp}
+          onSubmit={handleSubmit}
+          className="glow-border md:w-1/2 w-full bg-gradient-to-br from-[#ffffff70] via-[#ffffff60] to-[#ffffff50] backdrop-blur-xl p-8 rounded-3xl border border-gray-200 shadow-[0_20px_60px_rgba(0,0,0,0.08)] space-y-5"
+        >
+          <h2 className="text-3xl font-bold text-center text-[#000080] mb-2">
+            Connect with a Counselor
           </h2>
 
-          {/* Smooth Fade-out Success Message */}
-          {successMessage && (
-            <p
-              className="text-green-600 text-center font-semibold mb-4 transition-opacity duration-1000 ease-in-out opacity-100"
-            >
-              {successMessage}
-            </p>
-          )}
+          <input
+            type="text"
+            placeholder="Full Name"
+            value={fullName}
+            onChange={(e) => {
+              const value = e.target.value;
+              if (/^[a-zA-Z\s]*$/.test(value) && value.length <= 30) {
+                setFullName(value);
+              }
+            }}
+            className="bg-white/80 border border-gray-300 p-3 w-full rounded-xl focus:outline-none focus:ring-2 focus:ring-[#07c4f4] text-[15px] transition"
+            required
+          />
 
-          <form ref={formRef} className="space-y-4" onSubmit={handleSubmit}>
-            {/* Full Name Field (Only Alphabets & Spaces, Max 30 Characters) */}
+          <input
+            type="tel"
+            placeholder="Phone Number"
+            value={phoneNumber}
+            onChange={(e) => {
+              const input = e.target.value;
+              if (/^\d{0,10}$/.test(input)) {
+                setPhoneNumber(input);
+              }
+            }}
+            pattern="\d{10}"
+            maxLength={10}
+            inputMode="numeric"
+            className="bg-white/80 border border-gray-300 p-3 w-full rounded-xl focus:outline-none focus:ring-2 focus:ring-[#07c4f4] text-[15px] transition"
+            required
+          />
+
+          <input
+            type="email"
+            placeholder="Your Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="bg-white/80 border border-gray-300 p-3 w-full rounded-xl focus:outline-none focus:ring-2 focus:ring-[#07c4f4] text-[15px] transition"
+            required
+          />
+
+          <textarea
+            placeholder="Your Message (Max 50 words)"
+            value={message}
+            onChange={(e) => {
+              const words = e.target.value.trim().split(/\s+/);
+              if (words.length <= 50) {
+                setMessage(e.target.value);
+              }
+            }}
+            className="bg-white/80 border border-gray-300 p-3 w-full h-36 rounded-xl resize-none focus:outline-none focus:ring-2 focus:ring-[#07c4f4] text-[15px] placeholder-gray-500 transition"
+            required
+          />
+
+          <div className="flex items-center gap-4">
+            <motion.div className="flex items-center gap-2 backdrop-blur-md border px-6 py-3 rounded-2xl text-[#000080] text-lg font-mono tracking-widest select-none">
+              {captcha}
+              <button
+                type="button"
+                onClick={generateCaptcha}
+                className="ml-3 text-[#07c4f4] hover:text-[#e21d34] transition duration-200 text-xl"
+                title="Refresh Captcha"
+              >
+                🔄
+              </button>
+            </motion.div>
+
             <input
               type="text"
-              name="FullName"
-              placeholder="Full Name"
-              maxLength="30"
-              pattern="^[A-Za-z\s]{1,30}$"
-              title="Only alphabets are allowed (max 30 characters)"
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              onInput={(e) =>
-                (e.target.value = e.target.value.replace(/[^A-Za-z\s]/g, ""))
-              }
+              placeholder="Enter CAPTCHA"
+              value={userCaptcha}
+              onChange={(e) => setUserCaptcha(e.target.value)}
+              className="bg-white/80 border border-gray-300 p-3 w-full rounded-xl focus:outline-none focus:ring-2 focus:ring-[#07c4f4] text-[15px] transition"
               required
             />
+          </div>
 
-            {/* Phone Number Field (Only 10 Digits) */}
-            <input
-              type="text"
-              name="Phone"
-              placeholder="Phone Number"
-              maxLength="10"
-              pattern="^[0-9]{10}$"
-              inputMode="numeric"
-              title="Please enter a valid 10-digit phone number"
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              onInput={(e) =>
-                (e.target.value = e.target.value.replace(/[^0-9]/g, ""))
-              }
-              required
-            />
-
-            {/* Email Field (Valid Email Format) */}
-            <input
-              type="email"
-              name="email"
-              placeholder="Your Email"
-              pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-              title="Please enter a valid email address"
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
-
-            {/* Message Field (Max 150 Characters) */}
-            <textarea
-              name="message"
-              placeholder="Your Message"
-              rows={4}
-              maxLength={150}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            ></textarea>
-
-            {/* Submit Button */}
-            <button
-              type="submit"
-              className="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition duration-300"
-            >
-              Submit Inquiry
-            </button>
-          </form>
-        </div>
-      </div>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            type="submit"
+            className="bg-gradient-to-r from-[#07c4f4] to-[#000080] hover:from-[#07c4f4] hover:to-[#000080] text-white font-bold py-3 px-6 w-full rounded-xl transition duration-300 shadow-xl"
+          >
+            Submit
+          </motion.button>
+        </motion.form>
+      </motion.div>
     </div>
   );
 }
-
-export default Contact;

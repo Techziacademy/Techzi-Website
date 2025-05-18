@@ -123,11 +123,15 @@ const AuthPage = () => {
                     placeholder="Full Name"
                     maxLength="30"
                     value={formData.fullName}
-                    onChange={(e) =>
-                      setFormData({ ...formData, fullName: e.target.value })
-                    }
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      if (/^[A-Za-z\s]*$/.test(value)) {
+                        setFormData({ ...formData, fullName: value });
+                      }
+                    }}
                     className="w-full px-10 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
                   />
+
                   {errors.fullName && (
                     <p className="text-red-500 text-sm">{errors.fullName}</p>
                   )}

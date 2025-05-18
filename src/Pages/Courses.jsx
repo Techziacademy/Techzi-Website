@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 import Adca from "../assets/ADCA.jpg";
 import Dafab from "../assets/DAFAB.png";
@@ -152,75 +153,107 @@ function Courses() {
     };
 
     return (
-      <article className="bg-white rounded-2xl shadow-lg p-4 text-center transition-transform duration-300 hover:shadow-xl flex flex-col h-[200px] cursor-default">
-      <img
-        src={image}
-        alt={title}
-        className="w-full h-[120px] object-cover rounded-lg"
-        loading="lazy"
-        onError={(e) => (e.currentTarget.src = 'https://via.placeholder.com/300')}
-      />
-      <p
-        className="text-sm font-semibold text-gray-800 flex-grow p-2 line-clamp-1 cursor-pointer hover:text-blue-600"
-        onClick={handleCourseClick}
-        role="button"
-        tabIndex={0}
-        onKeyPress={(e) => e.key === 'Enter' && handleCourseClick()}
+      <article
+        className="
+    bg-white rounded-2xl shadow-lg p-4 text-center
+    transition-transform duration-300 hover:shadow-xl
+    flex flex-col
+    h-auto min-h-[300px] sm:min-h-[320px] cursor-pointer
+  "
       >
-        {title}
-      </p>
-    </article>
-    
+        <img
+          src={image}
+          alt={title}
+          className="w-full h-40 sm:h-44 md:h-48 lg:h-52 object-contain rounded-xl bg-white"
+          loading="lazy"
+          onError={(e) =>
+            (e.currentTarget.src = "https://via.placeholder.com/300")
+          }
+        />
+        <p
+          className="text-sm font-semibold text-gray-800 flex-grow p-2 line-clamp-3 sm:line-clamp-2 cursor-pointer hover:text-blue-600"
+          onClick={handleCourseClick}
+          role="button"
+          tabIndex={0}
+          onKeyPress={(e) => e.key === "Enter" && handleCourseClick()}
+        >
+          {title}
+        </p>
+      </article>
     );
   };
 
   return (
-    <div className="px-10">
+    <div className="bg-gray-50">
       {/* Header */}
-      <div className="text-center" id="courses">
-        <h1 className="text-5xl py-8 font-bold text-blue-800">
-          Our Popular Courses
+      <div className="text-center max-w-6xl mx-auto px-4" id="courses">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl pb-6 pt-16 font-bold text-blue-800">
+          Popular Courses
         </h1>
-        <p className="text-xl pb-5 text-gray-600">
+        <p className="text-base sm:text-lg md:text-xl pb-2 text-gray-600">
           Learn from the best with our top-rated courses.
         </p>
       </div>
 
-      {/* Diploma Courses Section */}
-      <div className="ml-10 mt-6">
-        <p className="text-2xl font-bold text-gray-700 border-b-2 border-gray-300 inline-block pb-2">
-          Diploma Courses (12 Months)
-        </p>
-      </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-6 p-6 max-w-7xl mx-auto">
-        {diplomaCourses.map((course, index) => (
-          <CourseCard key={index} {...course} />
-        ))}
-      </div>
+      {/* Diploma and Certificate Courses stacked vertically on mobile */}
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        viewport={{ once: true }}
+        className="max-w-7xl mx-auto px-6 py-16 flex flex-col gap-16 lg:flex-row"
+      >
+        {/* Left: Diploma Courses */}
+        <div className="w-full border-l-4 border-[#000080] bg-gradient-to-br from-[#e0f7ff] to-white p-6 rounded-2xl">
+          <h2 className="text-3xl font-extrabold mb-6 bg-gradient-to-r from-[#000080] to-[#07c4f4] bg-clip-text text-transparent tracking-tight text-center lg:text-left">
+            Diploma Courses (12 Months)
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {diplomaCourses.map((course, index) => (
+              <motion.div
+                key={index}
+                whileHover={{ scale: 1.05 }}
+                className="bg-white/60 backdrop-blur-lg p-5 rounded-2xl shadow-xl transition-all border-2 animate-borderPulse"
+              >
+                <CourseCard {...course} />
+              </motion.div>
+            ))}
+          </div>
+        </div>
 
-      {/* Certificate Courses Section */}
-      <div className="ml-10 mt-6">
-        <p className="text-2xl font-bold text-gray-700 border-b-2 border-gray-300 inline-block pb-2">
-          Certificate Courses (3 or 6 Months)
-        </p>
-      </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-6 p-6 max-w-7xl mx-auto">
-        {certificateCourses.map((course, index) => (
-          <CourseCard key={index} {...course} />
-        ))}
-      </div>
+        {/* Right: Certificate Courses */}
+        <div className="w-full border-r-4 border-[#e21d34] bg-gradient-to-br from-[#ffecec] to-white p-6 rounded-2xl">
+          <h2 className="text-3xl font-extrabold mb-6 bg-gradient-to-r from-[#000080] to-[#e21d34] bg-clip-text text-transparent tracking-tight text-center lg:text-left">
+            Certificate Courses (3 or 6 Months)
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {certificateCourses.map((course, index) => (
+              <motion.div
+                key={index}
+                whileHover={{ scale: 1.05 }}
+                className="bg-white/60 backdrop-blur-lg p-5 rounded-2xl shadow-xl transition-all border border-[#000080] hover:border-[#e21d34]"
+              >
+                <CourseCard {...course} />
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </motion.div>
 
-      {/* Short-Term Courses Section */}
-      <div className="ml-10 mt-6">
-        <p className="text-2xl font-bold text-gray-700 border-b-2 border-gray-300 inline-block pb-2">
-          Short-Term Courses (1-6 Months)
+      {/* Short-Term Courses */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10">
+        <p className="text-2xl sm:text-3xl font-extrabold text-transparent bg-gradient-to-r from-[#000080] to-[#07c4f4] bg-clip-text border-b-4 border-[#e21d34] inline-block pb-2 tracking-wide mb-6">
+          Short-Term Courses (1–6 Months)
         </p>
-      </div>
 
-      <div className="max-w-7xl mx-auto p-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 sm:gap-8">
           {shortTermCourses.map((course, index) => (
-            <CourseCard key={index} {...course} />
+            <div
+              key={index}
+              className="transform transition-transform duration-300 hover:scale-105 hover:shadow-xl border border-[#000080] rounded-2xl p-2 hover:border-[#07c4f4] bg-white"
+            >
+              <CourseCard {...course} />
+            </div>
           ))}
         </div>
       </div>

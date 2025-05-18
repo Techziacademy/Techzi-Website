@@ -1,61 +1,52 @@
 import React from "react";
-
 import Slides from "../Slides";
-
-const features = [
-  {
-    icon: "fa-graduation-cap",
-    title: "Scholarship Facility",
-    description:
-      "One make creepeth, man bearing their firmament won't great heaven.",
-  },
-  {
-    icon: "fa-earth-americas",
-    title: "Online Course",
-    description:
-      "One make creepeth, man bearing their firmament won't great heaven.",
-  },
-  {
-    icon: "fa-user-graduate",
-    title: "Global Certification",
-    description:
-      "One make creepeth, man bearing their firmament won't great heaven.",
-  },
-];
-
-const FeatureCard = ({ icon, title, description }) => (
-  <div className="card bg-blue-200 w-80 md:w-96 mx-auto text-center p-6 rounded-lg shadow-md">
-    <i className={`fa-solid ${icon} fa-3x py-4`}></i>
-    <h2 className="text-xl font-bold">{title}</h2>
-    <p className="text-gray-700">{description}</p>
-  </div>
-);
-
-const CourseCard = ({ img, title, }) => (
-  <div className="card bg-base-100 w-80 md:w-96 shadow-sm mx-5 rounded-lg overflow-hidden">
-    <figure>
-      <img
-        src={img}
-        alt={title}
-        className="w-full h-48 object-cover"
-        loading="lazy"
-      />
-    </figure>
-    <div className="p-4 text-center">
-      <h2 className="text-lg font-bold">{title}</h2>
-    </div>
-  </div>
-);
 
 function Home() {
   return (
-    <div className="max-w-full" id="home">
-      {/* Hero Section */}
-      <div>
-        <Slides />
-        
+    <>
+      <head>
+        {/* Title Tag for SEO */}
+        <title>Techzi Academy | Best Computer Institute in Delhi</title>
+
+        {/* Meta Description Tag */}
+        <meta
+          name="description"
+          content="Techzi Academy offers top-notch programming, web development, and IT courses in Delhi. Learn from industry experts and advance your career with the best courses in Prem Nagar Kirari."
+        />
+
+        {/* Meta Keywords Tag */}
+        <meta
+          name="keywords"
+          content="Best Computer Courses in Delhi, Techzi Academy, Programming Courses, Web Development Courses, IT Courses, Computer Institute in Delhi, Learn Programming in Delhi"
+        />
+
+        {/* Open Graph Meta Tags for Social Media Sharing */}
+        <meta property="og:title" content="Techzi Academy | Best Computer Institute in Delhi" />
+        <meta
+          property="og:description"
+          content="Join Techzi Academy and get the best programming, web development, and IT courses in Delhi. Learn from experts in Prem Nagar Kirari."
+        />
+        <meta property="og:image" content="/src/assets/preview-image.png" />
+        <meta property="og:url" content="https://techziacademy.in" />
+        <meta property="og:type" content="website" />
+
+        {/* Twitter Card Meta Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Techzi Academy | Best Computer Institute in Delhi" />
+        <meta
+          name="twitter:description"
+          content="Join Techzi Academy for top-rated programming, web development, and IT courses in Delhi. Learn from industry experts in Prem Nagar Kirari."
+        />
+        <meta name="twitter:image" content="/src/assets/preview-image.png" />
+      </head>
+
+      <div className="max-w-full" id="home">
+        {/* Hero Section */}
+        <div>
+          <Slides />
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

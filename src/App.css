@@ -1,0 +1,52 @@
+.glow-border {
+  position: relative;
+  z-index: 0;
+  border-radius: 1.5rem; /* match Tailwind's rounded-3xl */
+  overflow: hidden;
+}
+
+.glow-border::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  background: linear-gradient(
+    135deg,
+    #ff0057,
+    #07c4f4,
+    #ff0057,
+    #07c4f4
+  );
+  background-size: 400% 400%;
+  animation: neonBorderMove 6s linear infinite;
+  border-radius: inherit;
+  filter: blur(4px);
+}
+
+.glow-border::after {
+  content: "";
+  position: absolute;
+  z-index: -2;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: inherit;
+  border-radius: inherit;
+}
+
+/* Animation */
+@keyframes neonBorderMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

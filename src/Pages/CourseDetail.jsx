@@ -1,41 +1,41 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const courses = [
   {
     id: "1",
     title: "ADCA - Adv. Diploma in Computer Application (ADCA)",
     description:
-      "Semester 1 Fundamentals of Computer, Windows (Paint WordPad), MS-Office (Word - Complete Documentation Work), Ms Excel - (Basic to Advance Spreadsheet), Ms PowerPoint (Presentation Work), Ms Access (Database Application), Corel Draw (Create Logo Banner Card etc.), Photoshop (Photo Editing), Advanced Tally (All types of Vouchers - Payment Receipt Contra Journal Credit Note, Debit Note Inventory Management - Purchase Sale, Payroll BOM BRS Interest Calculation Taxation (e.g. Company Transactions) Semester 2 C Language, C++ Language, Web Designing & Development (Frontend) - HTML, CSS, JavaScript, Bootstrap, Internet Outlook Email Management Digital Communication, Database Management System (MySQL), Project Work, Real-world Application Development, Final Project Submission & Viva.",
+      "Semester 1 Fundamentals of Computer, Windows (Paint WordPad), MS-Office (Word - Complete Documentation Work), Ms Excel - (Basic to Advance Spreadsheet), Ms PowerPoint (Presentation Work), Ms Access (Database Application), Corel Draw (Create Logo Banner Card etc.), Photoshop (Photo Editing), Advanced Tally (All types of Vouchers - Payment Receipt Contra Journal Credit Note Debit Note Inventory Management - Purchase Sale, Payroll BOM BRS Interest Calculation Taxation (e.g. Company Transactions) Semester 2 C Language, C++ Language, Web Designing & Development (Frontend), HTML, CSS, JavaScript, Bootstrap, Internet Outlook Email Management Digital Communication, Database Management System (MySQL), Project Work, Real-world Application Development, Final Project Submission & Viva.",
     duration: "12 Months",
   },
   {
     id: "2",
     title: "DAFAB - Diploma in Adv. Financial Accounting & Banking",
     description:
-      "Semester 1 Fundamental of Computer Windows, Paint Wordpad MS-Office, MS- Word (Complete Documentation Work), MS-Excel+AdvanceExcel, MS- Power Point (Presentation Work), MS- Access (Database Application) Semester 2 E-Accounting AdvanceTally: Accounting, All type of Vouchers- Payment, Receipt, Contra, Journal, Credit Note, DebitNote,InventoryManagement-Purchase,Sale, Payroll (Salary Management)-Pay Head Employee Head Emp. Group AttendanceUnit, Maintain Attendance Register, SalarySheet, PaySlip, Overtime, Production Wages, ExportData-Excel Word PDF BOM BRS InterestCal, Taxation-GST TDS TCS (Eg.CompanyTransaction) Busy, Administration, Configuration, FeatureOption, MISReporting, Inventory Management, PurchaseandSale, Bom(BillofMaterials), Transaction, Taxation&E-FillingofITRs GST Filling, OnlineBanking, Internet Outlook EmailManagement DigitalCommunication",
+      "Semester 1 Fundamental of Computer Windows, Paint Wordpad, MS-Office, MS- Word (Complete Documentation Work), MS-Excel+AdvanceExcel, MS- Power Point (Presentation Work), MS- Access (Database Application) Semester 2 E-Accounting, AdvanceTally, Accounting, All type of Vouchers- Payment, Receipt, Contra, Journal, Credit Note, DebitNote,Inventory Management-Purchase,Sale, Payroll (Salary Management)-Pay Head Employee Head Emp. Group Attendance Unit, Maintain Attendance Register, Salary Sheet, Pay Slip, Over time, Production Wages, Export Data-Excel Word PDF, BOM, BRS Interest Cal, Taxation-GST TDS TCS (Eg.CompanyTransaction) ,Busy, Administration, Configuration, FeatureOption, MIS Reporting, Inventory Management, Purchase and Sale, Bom(Bill of Materials), Transaction, Taxation & E-Filling of ITRs GST Filling, Online Banking, Internet Outlook Email Management Digital Communication",
     duration: "12 Months",
   },
   {
     id: "3",
     title: "DIT - Diploma in Information Technology",
     description:
-      "Semester 1 Fundamentals of Computer, Windows (Paint WordPad), MS-Office (Word - Complete Documentation Work), Excel - (Spreadsheet Work), Ms-PowerPoint Presentation Work, Ms Access (Database Application), D.T.P (Desktop Publishing), Corel Draw (Create Logo Banner Card etc.), Photoshop (Photo Editing), PageMaker, Tally Semester 2 Programming Languages - C Language, C++ Language, Core Java, Web Designing & Development (HTML CSS), Internet, Outlook, Email Management, Digital Communication, Project Work, Final Project Submission & Viva.",
+      "Semester 1 Fundamentals of Computer, Windows (Paint WordPad), MS-Office (Word - Complete Documentation Work), Ms Excel - (Spreadsheet Work), Ms-PowerPoint Presentation Work, Ms Access (Database Application), D.T.P (Desktop Publishing), Corel Draw (Create Logo Banner Card etc.), Photoshop (Photo Editing), PageMaker, Tally Semester 2 Programming Languages - C Language, C++ Language, Core Java, Web Designing & Development, HTML, CSS, Internet, Outlook, Email Management, Digital Communication, Project Work, Final Project Submission & Viva.",
     duration: "12 Months",
   },
   {
     id: "4",
     title: "DCA - Diploma in Computer Applications",
     description:
-      "Semester 1 Fundamentals of Computer, Windows (Paint WordPad), MS Office: MS Word (Complete Documentation Work), MS Excel (Spreadsheet Work), MS Access (Database Application), Programming Language, C language, C ++ Proggramming Semester 2 Web Designing & Development (HTML CSS JavaScript), Database Management System (SQL), Python Programming, Project Work, Final Project Submission & Viva.",
+      "Semester 1 Fundamentals of Computer, Windows (Paint WordPad), MS Office: MS Word (Complete Documentation Work), MS Excel (Spreadsheet Work), MS Access (Database Application), Programming Language, C language, C ++ Proggramming Semester 2 Web Designing & Development, (HTML CSS JavaScript), Database Management System (SQL), Python Programming, Project Work, Final Project Submission & Viva.",
     duration: "12 Months",
   },
   {
     id: "5",
     title: "DWD - Diploma in Web Designing",
     description:
-      "Semester 1 Fundamentals of Computer, Windows: (Paint WordPad), MS-Word (Complete Documentation Work), Excel  (Spreadsheet Work), Ms Access (Database Application), D.T.P (Desk Top Publishing) - Corel Draw (Create Logo Banner Card etc.), Photoshop (Photo Editing), HTML (HyperText Markup Language) Semester 2 CSS Java Script, Frame work (Bootstarp), WordPress (Customization and Theme Development ), Internet, Outlook, Email Management, Digital Communication, Final Project Submission & Viva.",
+      "Semester 1 Fundamentals of Computer, Windows: (Paint WordPad), MS-Word (Complete Documentation Work), Excel  (Spreadsheet Work), Ms Access (Database Application), D.T.P (Desk Top Publishing), Corel Draw (Create Logo Banner Card etc.), Photoshop (Photo Editing), HTML (HyperText Markup Language) Semester 2 CSS Java Script, Frame work (Bootstarp), WordPress (Customization and Theme Development ), Internet, Outlook, Email Management, Digital Communication, Final Project Submission & Viva.",
     duration: "12 Months",
   },
   {
@@ -49,7 +49,7 @@ const courses = [
     id: "7",
     title: "DACS - Diploma in Advanced Computer Software",
     description:
-      "Semester 1 Fundamental of Computer, Windows (Paint Word Pad), MS Office (Word - Complete Documentation Work, Excel - Spreadsheet Work, PowerPoint - Presentation Work, Access - Database Application), HTML (HyperText Markup Language) Semester 2  Tally, Desktop Publishing (DTP), CorelDraw, PageMaker, Photoshop, Introduction to internet , Outlook, Email Management, Digital Communication, Project Work.",
+      "Semester 1 Fundamental of Computer, Windows (Paint Word Pad), MS Office (Word - Complete Documentation Work, Excel - Spreadsheet Work, PowerPoint - Presentation Work, Access - Database Application), HTML (HyperText Markup Language) Semester 2  Tally, Desktop Publishing (DTP), CorelDraw, PageMaker, Photoshop, Introduction to internet , Outlook, Email Management, Digital Communication,",
     duration: "12 Months",
   },
   {
@@ -83,50 +83,49 @@ const courses = [
   {
     id: "12",
     title: "Coming Soon",
-    description:
-      " ",
+    description: " ",
     duration: " ",
   },
   {
     id: "13",
     title: "CFA - Certificate in Financial Accounting",
     description:
-      "Accounting Principles, Tally ERP 9, GST & Taxation, Payroll Management, Financial Reporting",
+      "Fundamental of Computer,Windows: (Paint Word pad), MS-Office, MS- Word (Complete Documentation Work), MS- Excel (Spreadsheet Work), MS- Power Point (Presentation Work), MS- Access (Database Application),Computer Typing,Tally",
     duration: "6 Months",
   },
   {
     id: "14",
     title: "OM - Office Management",
     description:
-      "R Basics, Data Manipulation, Statistical Modeling, Data Visualization, Machine Learning Techniques",
-    duration: "3 Months",
+      "Fundamental of Computer,Windows(Paint Word pad),MS-Office, MS- Word (Complete Documentation Work), MS- Excel, MS- Power Point (Presentation Work), MS- Access (Database Application),Accounting with Tally, Computer Typing,Web Designing Using HTML,Photoshop (Basic Soft Skill),Internet, Outlook, Email Management, Digital Communication",
+    duration: "6 Months",
   },
   {
     id: "15",
     title: "(e-A/C) - E-Accounting",
     description:
-      "Introduction to E-Accounting, Computerized Accounting Systems, Financial Accounting & Transactions, GST & Taxation in E-Accounting, Payroll Management & Compliance, Inventory & Stock Management, Banking & Reconciliation, Reporting & Data Analysis, Cloud Accounting & Security,  Practical Applications & Case Studies",
+      "Fundamental of Computer,Windows:(Paint Word pad),MS-Ofce:, MS- Word (Complete Documentation Work), MS- Excel + Advance Excel, MS- Power Point (Presentation Work), MS- Access (Database Application), Advance Tally, Taxation & E-Filling of ITRs, GST Filling, Online Banking ",
     duration: "6 Months",
   },
   {
     id: "16",
     title: "CWD - Certificate in Web Desinging",
     description:
-      "Basics of Web Designing, HTML & CSS, JavaScript & jQuery, Bootstrap & Frameworks, WordPress & CMS, Hosting, Deployment & Final Project ",
+      "HTML, CSS,Java Script,Frame Work (Bootstrap),WordPress (Customization and Theme Development),Project Work on Website,",
     duration: "6 Months",
   },
   {
     id: "17",
     title: "CACS - Certificate in Adv. Computer Software",
     description:
-      "Computer Fundamentals & Operating Systems, MS Office & Office Automation, C / C++ Basics, Python Basics, Database Management System, Tally & Accounting Software, Internet & Digital Tools",
+      "Fundamental of Computer,Windows (Paint Word pad), MS-Office,MS- Word (Complete Documentation Work), MS- Excel (Spreadsheet Work), MS- Power Point (Presentation Work), MS- Access (Database Application),HTML (Hyper Text Markup Language)",
     duration: "6 Months",
   },
   {
     id: "18",
     title: "CDP - Certificate in Desktop Publishing",
     description:
-      "Photoshop, Corel Draw, InDesign, Illustrator, Banner & Logo Design, Page Layout Design, Printing Techniques",
+      "Fundamentals of Computer:, Windows:, Paint, Notepad, WordPad, MS-Office, MS Word: Complete Documentation Work, MS Excel: Spreadsheet Work, MS PowerPoint: Presentation Work, Designing, Corel Draw: (Create Logo Banner Card etc.), Photoshop: Photo Editing,PageMaker",
     duration: "6 Months",
   },
   {
@@ -140,7 +139,7 @@ const courses = [
     id: "20",
     title: "CCO - Certificate in Computer Operation",
     description:
-      "Basic Computer Skills, Internet & Email Usage, MS Office, File Management, Office Automation",
+      "Fundamental of Computer, Windows, Paint, Word pad, MS-Ofce, MS- Word (Complete Documentation Work), MS- Excel (Spreadsheet Work), MS- Power Point (Presentation Work),Internet & Email Management, Introduction to Internet, Composing, Sending & Managing Emails",
     duration: "3 Months",
   },
   {
@@ -154,8 +153,8 @@ const courses = [
     id: "22",
     title: "MIS - Management Information System",
     description:
-      "Database Management, SQL, Business Analytics, Advanced Excel, Power BI, IT Project Management",
-    duration: "3 Months",
+      "MS- Excel (Basic to Adv. Spreadsheet Work), Advance Excel, Visual Basic (VBA), SQL, Introduction to Internet, Outlook, Email Management",
+    duration: "6 Months",
   },
   {
     id: "23",
@@ -167,8 +166,7 @@ const courses = [
   {
     id: "24",
     title: "Coming Soon",
-    description:
-      " ",
+    description: " ",
     duration: " ",
   },
   {
@@ -361,41 +359,89 @@ const CourseDetail = () => {
 
   if (!course) return <p>Course not found</p>;
 
-  // विवरण को सेमेस्टर 1 और सेमेस्टर 2 के अनुसार विभाजित करें
   const parts = course.description
     .split(/(Semester 1|Semester 2)/)
     .map((part) => part.trim())
     .filter((part) => part); // Removes empty values
 
   return (
-    <div className="max-w-5xl mx-auto p-12 mt-20 mb-12 border border-gray-300 shadow-2xl rounded-3xl bg-gradient-to-br from-blue-50 to-blue-200">
-      {/* कोर्स का शीर्षक और अवधि */}
-      <h1 className="text-4xl md:text-4xl p-4 font-extrabold text-center text-transparent bg-gradient-to-r from-blue-800 to-blue-500 bg-clip-text">
-        {course.title}{" "}
-        <span className="text-lg md:text-2xl text-gray-700">
-          ({course.duration})
-        </span>
-      </h1>
+    <div className="min-h-screen w-full bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 flex items-center justify-center py-4 sm:py-6 md:py-10 px-4 sm:px-6 md:px-8 overflow-hidden">
+      <div className="w-full max-w-4xl h-auto bg-white bg-opacity-90 border-2 border-blue-300 rounded-2xl sm:rounded-3xl shadow-2xl backdrop-blur-xl px-4 sm:px-6 md:px-8 py-6 sm:py-8 md:py-10">
+        {/* Course Title */}
+        <motion.h1
+          initial={{ opacity: 0, y: -60 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.4, ease: "easeOut" }}
+          className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-transparent bg-gradient-to-r from-blue-800 via-indigo-600 to-teal-500 bg-clip-text text-center drop-shadow-2xl mb-6 sm:mb-8 mt-24 sm:mt-16 md:mt-12 max-w-full break-words p-3"
+        >
+          {course.title}
+        </motion.h1>
 
-      {/* कोर्स विवरण */}
-      <div className="text-gray-900 mt-8 text-lg md:text-xl leading-relaxed px-6 md:px-14">
+        {/* Course Duration */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5, duration: 0.9 }}
+          className="text-sm sm:text-base md:text-lg text-gray-800 font-semibold text-center tracking-wide"
+        >
+          Duration:{" "}
+          <span className="text-indigo-700 font-bold">{course.duration}</span>
+        </motion.div>
+
+        {/* Description (optional) */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.0, duration: 0.8 }}
+          className="text-center text-sm sm:text-base text-gray-700 mt-4 sm:mt-6 mb-8 sm:mb-10"
+        >
+          {/* Optional content can go here */}
+        </motion.div>
+
+        {/* Semester Details */}
         {parts.map((part, index) => (
-          <React.Fragment key={index}>
+          <motion.div
+            key={index}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.2 + index * 0.3, duration: 0.9 }}
+            className="w-full px-2 sm:px-4 md:px-8"
+          >
             {part === "Semester 1" || part === "Semester 2" ? (
-              <h2 className="mt-10 text-2xl font-bold text-blue-900 border-l-4 border-blue-600 pl-4 py-1 bg-blue-200 rounded-lg">
+              <motion.h2
+                id={part.toLowerCase().replace(" ", "")} // Set id for scrolling
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 1.0 }}
+                className="text-xl sm:text-2xl md:text-3xl font-bold text-blue-900 border-l-4 border-indigo-500 pl-4 py-3 bg-gradient-to-r from-blue-200 to-blue-400 rounded-lg shadow-2xl my-5 mb-6"
+              >
                 {part}
-              </h2>
+              </motion.h2>
             ) : (
-              <ul className="list-none space-y-3 mt-5">
-                {part.split(",").map((point, i) => (
-                  <li key={i} className="flex items-start gap-3 text-gray-800">
-                    <span className="text-blue-600 text-lg">✔</span>
-                    {point.trim()}
-                  </li>
-                ))}
+              <ul className="list-none space-y-4 sm:space-y-5 mt-4 sm:mt-6">
+                {part
+                  .split(",")
+                  .filter((point) => point.trim() !== "")
+                  .map((point, i) => (
+                    <motion.li
+                      key={i}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.1 * i, duration: 0.6 }}
+                      className="flex items-start gap-3 bg-white border border-gray-300 rounded-xl p-4 shadow-md hover:bg-indigo-50 hover:shadow-xl transition-all duration-300"
+                    >
+                      <span className="text-indigo-600 text-lg sm:text-xl mt-1">
+                        ✔
+                      </span>
+                      <span className="text-gray-800 font-medium text-sm sm:text-base">
+                        {point.trim()}
+                      </span>
+                    </motion.li>
+                  ))}
               </ul>
             )}
-          </React.Fragment>
+          </motion.div>
         ))}
       </div>
     </div>
@@ -403,3 +449,4 @@ const CourseDetail = () => {
 };
 
 export default CourseDetail;
+
