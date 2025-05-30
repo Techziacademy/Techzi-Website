@@ -6,7 +6,7 @@ function Home() {
   return (
     <>
       <Helmet>
-        <title>Techzi Academy | Best Computer Institute in Delhi</title>
+        <title>Techzi Academy | Best Computer Institute in Delhi | ISO Certified</title>
         <meta
           name="description"
           content="Techzi Academy offers top-notch programming, web development, and IT courses in Delhi. Explore our popular courses, meet our expert faculty, view our gallery, read insightful blogs, and contact us for career guidance. ISO certified, government registered, and globally recognized."
