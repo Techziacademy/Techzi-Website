@@ -87,7 +87,7 @@ const BlogSection = () => {
       className="bg-gradient-to-r from-[#07c4f4] to-[#000080] py-20 px-6 md:px-12"
       id="blog"
     >
-      <Helmet>
+      {/* <Helmet>
         <title>
           Techzi Academy Blogs – Learn Programming, AI, and Web Development
         </title>
@@ -95,7 +95,7 @@ const BlogSection = () => {
           name="description"
           content="Read insightful blogs from Techzi Academy on programming, web development, AI, data science, and more. Stay updated and grow your IT skills with expert-written content."
         />
-      </Helmet>
+      </Helmet> */}
 
       <div className="max-w-7xl mx-auto">
         <h2 className="text-4xl font-extrabold text-white mb-12 text-center tracking-wide">

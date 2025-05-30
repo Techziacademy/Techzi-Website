@@ -8,13 +8,26 @@ export default function AboutTechzi() {
       className="min-h-screen flex flex-col items-center justify-center px-4 md:px-12 py-16 bg-gradient-to-br from-[#000080] to-[#07c4f4] text-white relative overflow-hidden"
     >
       {/* SEO Meta Tags */}
-      <Helmet>
+      {/* <Helmet>
         <title>About Techzi Academy – Best Computer Institute in Kirari, Delhi</title>
         <meta
           name="description"
           content="Learn about Techzi Academy – an ISO certified, government-registered computer institute in Kirari, Delhi. Explore our career-focused courses in programming, AI, data science, Excel, Tally, and more."
         />
-      </Helmet>
+        <meta
+          name="keywords"
+          content="About Techzi Academy, Computer Institute Kirari, ISO Certified Computer Institute, Government Registered Computer Institute, Programming Courses Delhi, AI Courses Delhi"
+        />
+        <meta property="og:title" content="About Techzi Academy – Best Computer Institute in Kirari, Delhi" />
+        <meta property="og:description" content="Learn about Techzi Academy, our certifications, expert faculty, and career-focused courses in Kirari, Delhi." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://techziacademy.in/about" />
+        <meta property="og:image" content="https://techziacademy.in/logo.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="About Techzi Academy – Best Computer Institute in Kirari, Delhi" />
+        <meta name="twitter:description" content="Learn about Techzi Academy, our certifications, expert faculty, and career-focused courses in Kirari, Delhi." />
+        <meta name="twitter:image" content="https://techziacademy.in/logo.png" />
+      </Helmet> */}
 
       {/* Glow Background Effect */}
       <div className="absolute top-0 left-0 w-full h-full opacity-20 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#e21d34] via-[#07c4f4] to-transparent pointer-events-none animate-pulse" />

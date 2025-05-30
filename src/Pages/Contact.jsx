@@ -78,7 +78,7 @@ export default function Contact() {
 
   return (
     <div className="max-w-screen-lg mx-auto px-5 py-12 font-sans" id="contact">
-      <Helmet>
+      {/* <Helmet>
         <title>Contact Techzi Academy | Best Computer Institute in Delhi</title>
         <meta
           name="description"
@@ -122,7 +122,7 @@ export default function Contact() {
             }
           `}
         </script>
-      </Helmet>
+      </Helmet> */}
 
       <motion.div
         className="flex flex-col md:flex-row items-stretch justify-center gap-8"

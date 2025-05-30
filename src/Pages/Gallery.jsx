@@ -1,3 +1,5 @@
+
+import { Helmet } from "react-helmet";
 import React, { useState, useEffect } from "react";
 import Ig1 from "../assets/IG1.jpg";
 import Ig2 from "../assets/IG2.jpg";
@@ -72,6 +74,27 @@ function Gallery() {
 
   return (
     <section id="gallery" className="py-10">
+      <Helmet>
+        <title>Gallery | Techzi Academy</title>
+        <meta
+          name="description"
+          content="View the gallery of Techzi Academy, showcasing our campus, events, student activities, and achievements in Kirari, Delhi."
+        />
+        <meta
+          name="keywords"
+          content="Techzi Academy Gallery, Computer Institute Photos, Student Events, Campus Gallery, Techzi Academy Delhi"
+        />
+        <meta property="og:title" content="Gallery | Techzi Academy" />
+        <meta property="og:description" content="View the gallery of Techzi Academy, showcasing our campus, events, and student activities in Kirari, Delhi." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://techziacademy.in/gallery" />
+        <meta property="og:image" content="https://techziacademy.in/logo.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Gallery | Techzi Academy" />
+        <meta name="twitter:description" content="View the gallery of Techzi Academy, showcasing our campus, events, and student activities in Kirari, Delhi." />
+        <meta name="twitter:image" content="https://techziacademy.in/logo.png" />
+      </Helmet>
+
       <div className="max-w-6xl mx-auto px-4 text-center mt-[80px]">
         <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
           Gallery
